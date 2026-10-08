@@ -1,0 +1,221 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 1,
+    "pending": 0,
+    "failures": 5,
+    "start": "2026-10-08T21:25:32.136Z",
+    "end": "2026-10-08T21:25:35.136Z",
+    "duration": 3000,
+    "testsRegistered": 6,
+    "passPercent": 16.666666666666664,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f027c059-005d-4504-ac77-226e046c69d0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\hallazgos\\petstore-hallazgos.cy.js",
+      "file": "cypress\\e2e\\hallazgos\\petstore-hallazgos.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+          "title": "Hallazgos Petstore",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "H-09 la respuesta del POST es descriptiva (type distinto de unknown)",
+              "fullTitle": "Hallazgos Petstore H-09 la respuesta del POST es descriptiva (type distinto de unknown)",
+              "timedOut": null,
+              "duration": 916,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const u = nuevo();\ncy.request(\"POST\", api, u).then(res => {\n  expect(res.body.type, \"type\").to.not.eq(\"unknown\");\n  expect(res.body.message, \"message\").to.not.match(/^\\d+$/);\n});\nborrar(u.username);",
+              "err": {
+                "message": "AssertionError: type: expected 'unknown' to not equal 'unknown'",
+                "estack": "AssertionError: type: expected 'unknown' to not equal 'unknown'\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/petstore-hallazgos.cy.js:22:43)\n    at getRet (http://localhost:59511/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (http://localhost:59511/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (http://localhost:59511/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (http://localhost:59511/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (http://localhost:59511/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": ""
+              },
+              "uuid": "4500be18-3f19-4b86-8c4f-f083c5ec5e6c",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-10 un username duplicado devuelve 409",
+              "fullTitle": "Hallazgos Petstore H-10 un username duplicado devuelve 409",
+              "timedOut": null,
+              "duration": 311,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const u = nuevo();\ncy.request(\"POST\", api, u);\ncy.request({\n  method: \"POST\",\n  url: api,\n  body: u,\n  failOnStatusCode: false\n}).then(res => {\n  expect(res.status, \"status del duplicado\").to.eq(409);\n});\nborrar(u.username);",
+              "err": {
+                "message": "AssertionError: status del duplicado: expected 200 to equal 409",
+                "estack": "AssertionError: status del duplicado: expected 200 to equal 409\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/petstore-hallazgos.cy.js:33:54)\n    at getRet (http://localhost:59511/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (http://localhost:59511/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (http://localhost:59511/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (http://localhost:59511/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (http://localhost:59511/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": "- 200\n+ 409\n"
+              },
+              "uuid": "76083876-78e0-47c3-8c83-cfc6e6b49263",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-11 el GET no devuelve la contrasena",
+              "fullTitle": "Hallazgos Petstore H-11 el GET no devuelve la contrasena",
+              "timedOut": null,
+              "duration": 363,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const u = nuevo();\ncy.request(\"POST\", api, u);\ncy.request(\"GET\", `${api}/${u.username}`).then(res => {\n  expect(res.body, \"body\").to.not.have.property(\"password\");\n});\nborrar(u.username);",
+              "err": {
+                "message": "AssertionError: body: expected { Object (id, username, ...) } to not have property 'password'",
+                "estack": "AssertionError: body: expected { Object (id, username, ...) } to not have property 'password'\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/petstore-hallazgos.cy.js:43:43)\n    at getRet (http://localhost:59511/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (http://localhost:59511/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (http://localhost:59511/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (http://localhost:59511/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (http://localhost:59511/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": null
+              },
+              "uuid": "9d55d4f1-dac1-4eb4-8e87-f8f10ccfc5a2",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-12 un body invalido devuelve 400",
+              "fullTitle": "Hallazgos Petstore H-12 un body invalido devuelve 400",
+              "timedOut": null,
+              "duration": 330,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: \"POST\",\n  url: api,\n  body: {\n    id: \"no-es-numero\",\n    username: 12345\n  },\n  failOnStatusCode: false\n}).then(res => {\n  expect(res.status, \"status\").to.eq(400);\n});",
+              "err": {
+                "message": "AssertionError: status: expected 500 to equal 400",
+                "estack": "AssertionError: status: expected 500 to equal 400\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/petstore-hallazgos.cy.js:55:38)\n    at getRet (http://localhost:59511/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (http://localhost:59511/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (http://localhost:59511/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (http://localhost:59511/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (http://localhost:59511/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": "- 500\n+ 400\n"
+              },
+              "uuid": "af9b16f3-8276-4777-9d8f-5f57472aaad2",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-13 rechaza email y telefono con formato invalido",
+              "fullTitle": "Hallazgos Petstore H-13 rechaza email y telefono con formato invalido",
+              "timedOut": null,
+              "duration": 357,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const u = nuevo({\n  email: \"abc\",\n  phone: \"letras\"\n});\ncy.request({\n  method: \"POST\",\n  url: api,\n  body: u,\n  failOnStatusCode: false\n}).then(res => {\n  expect(res.status, \"status\").to.eq(400);\n});\nborrar(u.username);",
+              "err": {
+                "message": "AssertionError: status: expected 200 to equal 400",
+                "estack": "AssertionError: status: expected 200 to equal 400\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/petstore-hallazgos.cy.js:63:40)\n    at getRet (http://localhost:59511/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (http://localhost:59511/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (http://localhost:59511/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (http://localhost:59511/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (http://localhost:59511/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": "- 200\n+ 400\n"
+              },
+              "uuid": "c8b543f7-3cdc-45bb-83eb-a0fa3ab03294",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-14 el servidor responde en menos de 2 segundos",
+              "fullTitle": "Hallazgos Petstore H-14 el servidor responde en menos de 2 segundos",
+              "timedOut": null,
+              "duration": 342,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const u = nuevo();\ncy.request(\"POST\", api, u).then(res => {\n  cy.log(`POST: ${res.duration} ms`);\n  expect(res.duration, \"ms POST\").to.be.lessThan(2000);\n});\ncy.request(\"GET\", `${api}/${u.username}`).then(res => {\n  cy.log(`GET: ${res.duration} ms`);\n  expect(res.duration, \"ms GET\").to.be.lessThan(2000);\n});\nborrar(u.username);",
+              "err": {},
+              "uuid": "00cc9507-e215-4b6a-b044-baac81416949",
+              "parentUUID": "15c3430f-7e6f-44b7-a0bb-7c498e2ebd11",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "00cc9507-e215-4b6a-b044-baac81416949"
+          ],
+          "failures": [
+            "4500be18-3f19-4b86-8c4f-f083c5ec5e6c",
+            "76083876-78e0-47c3-8c83-cfc6e6b49263",
+            "9d55d4f1-dac1-4eb4-8e87-f8f10ccfc5a2",
+            "af9b16f3-8276-4777-9d8f-5f57472aaad2",
+            "c8b543f7-3cdc-45bb-83eb-a0fa3ab03294"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 2619,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

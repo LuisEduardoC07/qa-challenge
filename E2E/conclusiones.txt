@@ -1,0 +1,27 @@
+﻿CONCLUSIONES - E2E (SauceDemo)
+
+RESULTADO DEL FLUJO PRINCIPAL
+- El flujo de compra (login, dos productos, carrito, formulario y confirmacion "THANK YOU FOR YOUR ORDER") paso en Cypress.
+- El resumen de la orden fue coherente: Item total $39.98 + Tax $3.20 = Total $43.18.
+- El caso negativo con locked_out_user mostro "Epic sadface: Sorry, this user has been locked out." y no dio acceso al inventario.
+
+HALLAZGOS CONFIRMADOS (carpeta hallazgos)
+Los perfiles problem_user, error_user, performance_glitch_user y visual_user estan disenados por el sitio para simular fallos; se documentan como comportamiento observado con cada perfil.
+- H-02 (problem_user): solo 1 imagen distinta para 6 productos; al agregar los 6 productos el carrito muestra 3. Severidad media.
+- H-03 (error_user): la aplicacion lanza un error de JavaScript (Cannot read properties of undefined, reading 'value') al escribir en el campo Last Name y el flujo se interrumpe. Severidad alta.
+- H-04 (performance_glitch_user): el login tardo 5247 ms; se esperaba menos de 2000 ms. Severidad baja.
+- H-05 (visual_user): el inventario muestra $89.42 y el carrito $29.99 para el primer producto. Severidad media.
+- H-06 (standard_user): el carrito se conserva despues de cerrar sesion y volver a entrar. Podria ser intencional. Severidad baja.
+- H-07: Postal Code acepta "abc!@#" sin mostrar ningun error. Severidad baja.
+
+OBSERVACION
+- H-01: peticiones POST con respuesta 401 hacia events.backtrace.io (telemetria de terceros, token invalido). No afectan el flujo. Se observo en la ejecucion interactiva y no se repitio en una ejecucion sin ventana (headless).
+
+NO REPRODUCIDO
+- H-08: el Total coincide con Item total mas Tax.
+
+RECOMENDACIONES
+- Corregir primero H-03 y los defectos de severidad media, y reutilizar los scripts de hallazgos como regresion.
+- Integrar la suite en un pipeline de integracion continua.
+- Ampliar la automatizacion con mas casos negativos y de validacion de formularios.
+- Revisar la configuracion del servicio de telemetria que devuelve 401.

@@ -1,0 +1,267 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 8,
+    "passes": 1,
+    "pending": 0,
+    "failures": 7,
+    "start": "2026-10-08T21:25:39.361Z",
+    "end": "2026-10-08T21:26:22.326Z",
+    "duration": 42965,
+    "testsRegistered": 8,
+    "passPercent": 12.5,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ac385db5-83c3-40f1-94c9-4c704f2a2ef8",
+      "title": "",
+      "fullFile": "cypress\\e2e\\hallazgos\\saucedemo-hallazgos.cy.js",
+      "file": "cypress\\e2e\\hallazgos\\saucedemo-hallazgos.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+          "title": "Hallazgos SauceDemo",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "H-02 problem_user: cada producto tiene su propia imagen",
+              "fullTitle": "Hallazgos SauceDemo H-02 problem_user: cada producto tiene su propia imagen",
+              "timedOut": null,
+              "duration": 2525,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"problem_user\");\ncy.get(\".inventory_item_img img\").then($imgs => {\n  const srcs = [...$imgs].map(i => i.getAttribute(\"src\"));\n  expect(new Set(srcs).size, \"imagenes distintas\").to.eq(srcs.length);\n});",
+              "err": {
+                "message": "AssertionError: imagenes distintas: expected 1 to equal 6",
+                "estack": "AssertionError: imagenes distintas: expected 1 to equal 6\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:27:58)\n    at getRet (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": "- 1\n+ 6\n"
+              },
+              "uuid": "a029d696-6681-497d-8482-42bda963eb3e",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-02 problem_user: todos los botones Add to cart funcionan",
+              "fullTitle": "Hallazgos SauceDemo H-02 problem_user: todos los botones Add to cart funcionan",
+              "timedOut": null,
+              "duration": 6701,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"problem_user\");\ncy.get('button[data-test^=\"add-to-cart\"]').each($b => {\n  cy.wrap($b).click();\n});\ncy.get('[data-test=\"shopping-cart-badge\"]').should(\"have.text\", \"6\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '<span.shopping_cart_badge>' to have text '6', but the text was '3'",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '<span.shopping_cart_badge>' to have text '6', but the text was '3'\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:36:48)",
+                "diff": "- '3'\n+ '6'\n"
+              },
+              "uuid": "d2c25bcd-4bc4-42a6-a7c3-9b32960c1909",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-03 error_user: se puede completar la compra",
+              "fullTitle": "Hallazgos SauceDemo H-03 error_user: se puede completar la compra",
+              "timedOut": null,
+              "duration": 1423,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"error_user\");\ncy.get('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click();\ncy.get('[data-test=\"shopping-cart-link\"]').click();\ncy.get('[data-test=\"checkout\"]').click();\ncy.get('[data-test=\"firstName\"]').type(\"Luis\");\ncy.get('[data-test=\"lastName\"]').type(\"Castillo\").should(\"have.value\", \"Castillo\");\ncy.get('[data-test=\"postalCode\"]').type(\"10101\");\ncy.get('[data-test=\"continue\"]').click();\ncy.get('[data-test=\"finish\"]').click();\ncy.url().should(\"include\", \"checkout-complete\");",
+              "err": {
+                "message": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of undefined (reading 'value')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application",
+                "estack": "TypeError: The following error originated from your application code, not from Cypress.\n\n  > Cannot read properties of undefined (reading 'value')\n\nWhen Cypress detects uncaught errors originating from your application it will automatically fail the current test.\n\nThis behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.\n\nhttps://on.cypress.io/uncaught-exception-from-application\n    at onChange (https://www.saucedemo.com/assets/index-D3OxT1jE.js:573:14835)\n    at bd (https://www.saucedemo.com/assets/index-D3OxT1jE.js:15:126186)\n    at <unknown> (https://www.saucedemo.com/assets/index-D3OxT1jE.js:15:131179)\n    at ln (https://www.saucedemo.com/assets/index-D3OxT1jE.js:15:15076)\n    at Td (https://www.saucedemo.com/assets/index-D3OxT1jE.js:15:127413)\n    at dp (https://www.saucedemo.com/assets/index-D3OxT1jE.js:16:28446)\n    at lp (https://www.saucedemo.com/assets/index-D3OxT1jE.js:16:28268)\n    at Keyboard.fireSimulatedEvent (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:116691:27)\n    at Keyboard.performSimulatedDefault (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:116931:54)\n    at Keyboard.simulatedKeydown (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:116824:25)",
+                "diff": null
+              },
+              "uuid": "0f819256-aec4-409e-b505-1fed33c7aaed",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-04 performance_glitch_user: login en menos de 2 segundos",
+              "fullTitle": "Hallazgos SauceDemo H-04 performance_glitch_user: login en menos de 2 segundos",
+              "timedOut": null,
+              "duration": 6296,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "let inicio;\ncy.visit(\"https://www.saucedemo.com/\");\ncy.get('[data-test=\"username\"]').type(\"performance_glitch_user\");\ncy.get('[data-test=\"password\"]').type(\"secret_sauce\");\ncy.then(() => {\n  inicio = Date.now();\n});\ncy.get('[data-test=\"login-button\"]').click();\ncy.url({\n  timeout: 20000\n}).should(\"include\", \"/inventory.html\").then(() => {\n  const ms = Date.now() - inicio;\n  cy.log(`Tiempo de login: ${ms} ms`);\n  expect(ms, \"ms de login\").to.be.lessThan(2000);\n});",
+              "err": {
+                "message": "AssertionError: ms de login: expected 5247 to be below 2000",
+                "estack": "AssertionError: ms de login: expected 5247 to be below 2000\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:66:40)\n    at getRet (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:121014:21)",
+                "diff": "- 5247\n+ 2000\n"
+              },
+              "uuid": "1ba5b04d-8683-44c8-8071-4e9e8ae31305",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-05 visual_user: el precio es igual en inventario y carrito",
+              "fullTitle": "Hallazgos SauceDemo H-05 visual_user: el precio es igual en inventario y carrito",
+              "timedOut": null,
+              "duration": 6201,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"visual_user\");\ncy.get('[data-test=\"inventory-item-price\"]').first().invoke(\"text\").then(precioInventario => {\n  cy.get('button[data-test^=\"add-to-cart\"]').first().click();\n  cy.get('[data-test=\"shopping-cart-link\"]').click();\n  cy.get('[data-test=\"inventory-item-price\"]').first().invoke(\"text\").should(\"eq\", precioInventario);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected '$29.99' to equal '$89.42'",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected '$29.99' to equal '$89.42'\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:81:11)\n    at getRet (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120751:20)\n    at tryCatcher (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:1780:23)\n    at Promise.attempt.Promise.try (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:4288:29)\n    at Context.thenFn (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:120763:66)\n    at Context.then (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:121014:21)\n    at wrapped (https://www.saucedemo.com/__cypress/runner/cypress_runner.js:146077:19)",
+                "diff": "- '$29.99'\n+ '$89.42'\n"
+              },
+              "uuid": "e942b8df-984e-4bbe-bf11-dc36ebbd7c4b",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-06 standard_user: el carrito queda vacio tras cerrar sesion",
+              "fullTitle": "Hallazgos SauceDemo H-06 standard_user: el carrito queda vacio tras cerrar sesion",
+              "timedOut": null,
+              "duration": 7043,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"standard_user\");\ncy.get('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click();\ncy.get(\"#react-burger-menu-btn\").click();\ncy.get(\"#logout_sidebar_link\").click();\ncy.get('[data-test=\"username\"]').type(\"standard_user\");\ncy.get('[data-test=\"password\"]').type(\"secret_sauce\");\ncy.get('[data-test=\"login-button\"]').click();\ncy.get('[data-test=\"shopping-cart-badge\"]').should(\"not.exist\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected <span.shopping_cart_badge> not to exist in the DOM, but it was continuously found.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected <span.shopping_cart_badge> not to exist in the DOM, but it was continuously found.\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:93:48)",
+                "diff": null
+              },
+              "uuid": "ab5d904e-d593-4c37-84dd-719451dd140a",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-07 standard_user: el codigo postal rechaza letras y simbolos",
+              "fullTitle": "Hallazgos SauceDemo H-07 standard_user: el codigo postal rechaza letras y simbolos",
+              "timedOut": null,
+              "duration": 6849,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "login(\"standard_user\");\ncy.get('[data-test=\"add-to-cart-sauce-labs-backpack\"]').click();\ncy.get('[data-test=\"shopping-cart-link\"]').click();\ncy.get('[data-test=\"checkout\"]').click();\ncy.get('[data-test=\"firstName\"]').type(\"Luis\");\ncy.get('[data-test=\"lastName\"]').type(\"Castillo\");\ncy.get('[data-test=\"postalCode\"]').type(\"abc!@#\");\ncy.get('[data-test=\"continue\"]').click();\ncy.get('[data-test=\"error\"]').should(\"be.visible\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[data-test=\"error\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `[data-test=\"error\"]`, but never found it.\n    at Context.eval (webpack://qa-challenge/./cypress/e2e/hallazgos/saucedemo-hallazgos.cy.js:105:34)",
+                "diff": null
+              },
+              "uuid": "74447794-860b-4cdd-89b8-2d009a874d4c",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "H-08 standard_user: Total = Item total + Tax",
+              "fullTitle": "Hallazgos SauceDemo H-08 standard_user: Total = Item total + Tax",
+              "timedOut": null,
+              "duration": 1720,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "irAlResumen(\"standard_user\");\ncy.get('[data-test=\"subtotal-label\"]').invoke(\"text\").then(s => {\n  cy.get('[data-test=\"tax-label\"]').invoke(\"text\").then(t => {\n    cy.get('[data-test=\"total-label\"]').invoke(\"text\").then(tot => {\n      const esperado = Math.round((num(s) + num(t)) * 100) / 100;\n      expect(num(tot), \"total\").to.eq(esperado);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "6a6883f2-9bc6-4b05-aee0-0e571bf83aa0",
+              "parentUUID": "9871cd56-b3a8-426b-afbc-e4887b2567a5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6a6883f2-9bc6-4b05-aee0-0e571bf83aa0"
+          ],
+          "failures": [
+            "a029d696-6681-497d-8482-42bda963eb3e",
+            "d2c25bcd-4bc4-42a6-a7c3-9b32960c1909",
+            "0f819256-aec4-409e-b505-1fed33c7aaed",
+            "1ba5b04d-8683-44c8-8071-4e9e8ae31305",
+            "e942b8df-984e-4bbe-bf11-dc36ebbd7c4b",
+            "ab5d904e-d593-4c37-84dd-719451dd140a",
+            "74447794-860b-4cdd-89b8-2d009a874d4c"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 38758,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

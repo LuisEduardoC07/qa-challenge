@@ -1,0 +1,24 @@
+﻿CONCLUSIONES - APIs (Petstore, CRUD de usuario)
+
+RESULTADO DEL FLUJO PRINCIPAL
+- Crear (POST), buscar (GET), actualizar (PUT), buscar el actualizado (GET) y eliminar (DELETE) respondieron 200.
+- Tras eliminar, la consulta del usuario devolvio 404, como se esperaba.
+- Se identificaron las entradas (body enviado) y se capturaron las salidas (status y body de la respuesta) de cada caso.
+
+HALLAZGOS CONFIRMADOS (carpeta hallazgos)
+- H-09: la respuesta del POST devuelve type "unknown". Severidad baja.
+- H-10: crear un usuario con un username existente devuelve 200; se esperaba 409. Severidad media.
+- H-11: el GET /user/{username} incluye el campo password en la respuesta. Severidad alta.
+- H-12: un body invalido (id de texto y username numerico) devuelve 500; se esperaba 400. Severidad media.
+- H-13: se acepta email "abc" y telefono "letras" con 200; se esperaba 400. Severidad baja.
+
+NO REPRODUCIDO
+- H-14: las respuestas de POST y GET tardaron menos de 2 segundos en esta ejecucion.
+
+LIMITACIONES
+- Petstore es un servidor publico compartido; sus respuestas pueden variar entre ejecuciones y no son una base fiable para medir rendimiento.
+
+RECOMENDACIONES
+- No devolver la contrasena en las respuestas y exigir autenticacion en los endpoints (H-11).
+- Responder 409 ante usernames duplicados y 400 ante datos invalidos (H-10, H-12, H-13).
+- Devolver mensajes descriptivos en las respuestas de creacion y actualizacion (H-09).
